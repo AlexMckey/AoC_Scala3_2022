@@ -1,0 +1,29 @@
+.DS_Store
+*.class
+*.tasty
+*.log
+*~
+# sbt specific
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+project/local-plugins.sbt
+.history
+
+# Scala-IDE specific
+.scala_dependencies
+.cache
+.classpath
+.project
+.settings
+classes/
+
+# idea
+.idea
+.idea_modules
+/.worksheet/
+/out/production/AoC_Scala3/day21/day21.sc
+/out/production/AoC_Scala3/day20/day20_tricky.sc
