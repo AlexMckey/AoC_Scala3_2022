@@ -8,5 +8,3 @@ val w = h.map(e => if e.isLower then e - 'a' + 1 else e - 'A' + 27)
 w.sum
 val t = rs.grouped(3)
 t.map(_.reduce(_ intersect _)).toList
-val Array(l,y,r) = t.next()
-l intersect y intersect r

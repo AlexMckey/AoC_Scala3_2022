@@ -7,7 +7,7 @@ import scala.language.implicitConversions
 import Numeric.Implicits._
 
 
-object Day02 extends aocd.Problem(2022, 2):
+object Day02 extends aocd.Problem(2022, 2, Title = "Rock Paper Scissors"):
   def run(input: String): Unit =
     val games = prep(input)
     part1(games)
@@ -42,7 +42,7 @@ object Day02 extends aocd.Problem(2022, 2):
       case "Z" => win.map(_.swap)(r.a))
 
   def prep(input: String): Seq[Round] =
-    time("prep", {
+    time("\tprep", {
       input
         .toStrs
         .map(_.toRound)

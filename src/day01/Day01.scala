@@ -1,9 +1,11 @@
 package day01
 
-import AoC_Lib._
-import Inputs._
+import AoC_Lib.*
+import Inputs.*
 
-object Day01 extends aocd.Problem(2022, 1):
+import javax.swing.border.TitledBorder
+
+object Day01 extends aocd.Problem(2022, 1, Title = "Calorie Counting"):
   def run(input: String): Unit =
     val things = prep(input)
     part1(things)
@@ -11,7 +13,7 @@ object Day01 extends aocd.Problem(2022, 1):
     ()
 
   def prep(input: String): Seq[Int] =
-    time("prep", {
+    time("\tprep", {
       input
         .splitByBlankLines
         .map(_.toInts.sum)

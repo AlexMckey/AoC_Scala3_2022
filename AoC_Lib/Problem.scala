@@ -3,11 +3,12 @@ package aocd
 import os.Path
 
 abstract class Problem(year: Int,
-                        day: Int,
-                        api: Api = Api,
-                        assetsDir: os.Path = Problem.assetsDir):
-  val problemDir: Path = assetsDir / year.toString
-  val inputData: Path = problemDir / f"input$day%02d.txt"
+                       day: Int,
+                       api: Api = Api,
+                       assetsDir: os.Path = Problem.assetsDir,
+                       Title: String = ""):
+  private val problemDir: Path = assetsDir / year.toString
+  private val inputData: Path = problemDir / f"input$day%02d.txt"
 
   if !os.exists(problemDir) then os.makeDir.all(problemDir)
 
@@ -16,12 +17,16 @@ abstract class Problem(year: Int,
     val token = Problem.getTokenFrom(Problem.getTokenFile(assetsDir))
     os.write.over(inputData, api.getData(year, day, token).bytes)
 
-  def main(args: Array[String]): Unit = run(os.read(inputData))
+  def main(args: Array[String]): Unit =
+    print(s"${Console.CYAN}Day $day: ")
+    if Title.nonEmpty then print(s"${Console.BLUE}$Title")
+    println(Console.RESET)
+    run(os.read(inputData))
 
   def run(input: String): Unit
 
-  final def part1[A](f: => A): A = time("part 1", f, withResult = true)
-  final def part2[A](f: => A): A = time("part 2", f, withResult = true)
+  final def part1[A](f: => A): A = time("\tpart 1", f, withResult = true)
+  final def part2[A](f: => A): A = time("\tpart 2", f, withResult = true)
 
   final def time[A](prefix: String = "", block: => A, withResult: Boolean = false): A =
     val start = System.nanoTime()

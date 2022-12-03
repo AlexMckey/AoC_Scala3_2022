@@ -3,7 +3,8 @@ package day03
 import AoC_Lib._
 import Inputs._
 
-object Day03 extends aocd.Problem(2022, 3):
+object Day03 extends aocd.Problem(2022, 3, Title = "Rucksack Reorganization"):
+
   def run(input: String): Unit =
     val things = prep(input)
     //val things = prep("vJrwpWtwJgWrhcsFMMfFFhFp\njqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL\nPmmdzqPrVvPwwTWBwg\nwMqvLMZHhHMvwLHjbvcjnnSBnvTQFn\nttgJtRGJQctTZtZT\nCrZsJsPPZsGzwwsLwLmpwMDw")
@@ -12,10 +13,7 @@ object Day03 extends aocd.Problem(2022, 3):
     ()
 
   def prep(input: String): Seq[String] =
-    time("prep", {
-      input
-        .toStrs
-    })
+    time("\tprep", { input.toStrs })
 
   def part(items: Seq[Seq[String]]): Int =
     items
