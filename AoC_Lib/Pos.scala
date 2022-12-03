@@ -1,36 +1,43 @@
 package AoC_Lib
 
-trait BoxPosOps[A <: BoxPosOps[A]] extends PosOps[A] {
+import scala.annotation.targetName
+
+trait BoxPosOps[A <: BoxPosOps[A]] extends PosOps[A]:
+  @targetName("LE")
   def <=(that: A): Boolean
   def min(that: A): A
   def max(that: A): A
-}
 
-trait PosOps[A <: PosOps[A]] {
+trait PosOps[A <: PosOps[A]]:
+  @targetName("Plus")
   def +(that: A): A
+  @targetName("Times")
   def *(k: Int): A
+  @targetName("TimesLeft")
   def *:(k: Int): A = this * k
-
+  @targetName("UnaryMinus")
   def unary_- : A = -1 *: this
+  @targetName("Minus")
   def -(that: A): A = this + (-that)
 
   def manhattanDistance(that: A): Int
-}
 
-trait PosFactory[A <: PosOps[A]] {
+trait PosFactory[A <: PosOps[A]]:
   val zero: A
-}
 
-case class Pos(x: Int, y: Int) extends BoxPosOps[Pos] {
+case class Pos(x: Int, y: Int) extends BoxPosOps[Pos]:
+  @targetName("Plus")
   override def +(that: Pos): Pos =
     Pos(x + that.x, y + that.y)
 
+  @targetName("Times")
   override def *(k: Int): Pos =
     Pos(k * x, k * y)
 
   override def manhattanDistance(that: Pos): Int =
     (x - that.x).abs + (y - that.y).abs
 
+  @targetName("LE")
   override def <=(that: Pos): Boolean =
     x <= that.x && y <= that.y
 
@@ -45,15 +52,13 @@ case class Pos(x: Int, y: Int) extends BoxPosOps[Pos] {
   def near4: Seq[Pos] = Pos.axisOffsets.map(_ + this)
   def near: Seq[Pos] = Pos.allOffsets.map(_ + this)
   def all9: Seq[Pos] = Pos.all9Sorted.map(_ + this)
-}
 
-object Pos extends PosFactory[Pos] {
+object Pos extends PosFactory[Pos]:
   override val zero: Pos = Pos(0, 0)
   extension (s: String)
-    def toPos: Pos = {
+    def toPos: Pos =
       val Array(x,y) = s.split(',').map(_.toInt)
       Pos(x,y)
-    }
 
   val axisOffsets: Seq[Pos] = Seq(Pos(0, 1), Pos(-1, 0), Pos(1, 0), Pos(0, -1))
   val diagonalOffsets: Seq[Pos] = Seq(Pos(-1, 1), Pos(1, 1), Pos(-1, -1), Pos(1, -1))
@@ -61,4 +66,3 @@ object Pos extends PosFactory[Pos] {
   val all9Sorted: Seq[Pos] = Seq(Pos(-1, -1), Pos(0, -1), Pos(1, -1),
                                  Pos(-1,  0), Pos(0,  0), Pos(1,  0),
                                  Pos(-1,  1), Pos(0,  1), Pos(1,  1))
-}

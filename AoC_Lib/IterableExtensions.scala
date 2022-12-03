@@ -1,6 +1,6 @@
 package AoC_Lib
 
-object IterableExtensions {
+object IterableExtensions:
   
   extension [A] (coll: Iterable[A])
 
@@ -10,5 +10,3 @@ object IterableExtensions {
     def groupCount[K](key: A => K): Map[K, Int] = coll.groupMapReduce(key)(_ => 1)(_ + _)
 
     def second: A = coll.tail.head
-
-}

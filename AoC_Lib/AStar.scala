@@ -2,19 +2,18 @@ package AoC_Lib
 
 import scala.annotation.tailrec
 
-trait Grid[T] {
+trait Grid[T]:
   def heuristicDistance(from: T, to: T): Int
 
   def getNeighbours(state: T): List[T]
 
   def moveCost(from: T, to: T): Int
-}
 
-def aStarSearch[T](start: T, finish: T, grid: Grid[T]): Option[Int] = {
+def aStarSearch[T](start: T, finish: T, grid: Grid[T]): Option[Int] =
   case class NodeInfo(costFromStart: Int, estimatedTotalCost: Int)
 
   @tailrec
-  def loop(closed: Set[T], open: Map[T, NodeInfo]): Option[Int] = {
+  def loop(closed: Set[T], open: Map[T, NodeInfo]): Option[Int] =
     if (open.isEmpty) return None
     val (current, NodeInfo(currentCostFromStart, estimatedTotalCost)) = open.minBy(_._2.estimatedTotalCost)
     if (current == finish) return Some(estimatedTotalCost)
@@ -29,7 +28,5 @@ def aStarSearch[T](start: T, finish: T, grid: Grid[T]): Option[Int] = {
             else open.updated(neighbor,
               NodeInfo(neighborCostFromStart, neighborCostFromStart + grid.heuristicDistance(neighbor, finish)))
         })
-  }
 
   loop(Set(), Map(start -> NodeInfo(0, grid.heuristicDistance(start, finish))))
-}

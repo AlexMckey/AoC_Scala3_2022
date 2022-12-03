@@ -11,5 +11,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="scala-sdk-3.2.1" level="application" />
     <orderEntry type="library" scope="TEST" name="scalatest.scalatest_3" level="application" />
+    <orderEntry type="library" name="io.github.bbstilson.aocd_2.13" level="project" />
   </component>
 </module>
