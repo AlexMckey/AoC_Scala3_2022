@@ -23,14 +23,10 @@ object Day04 extends aocd.Problem(2022, 4, Title = "Camp Cleanup"):
     })
 
   def fullContain(p1: Pos, p2: Pos): Boolean =
-    (p1.x >= p2.x && p1.y <= p2.y) ||
-      (p2.x >= p1.x && p2.y <= p1.y)
+    (p1.x >= p2.x && p1.y <= p2.y) || (p2.x >= p1.x && p2.y <= p1.y)
 
   def overlap(p1: Pos, p2: Pos): Boolean =
-    (p2.x >= p1.x && p2.x <= p1.y) ||
-      (p2.y >= p1.x && p2.y <= p1.y) ||
-      (p1.x >= p2.x && p1.x <= p2.y) ||
-      (p1.y >= p2.x && p1.y <= p2.y)
+    (p2.x <= p1.x && p1.x <= p2.y) || (p1.x <= p2.x && p2.x <= p1.y)
 
   def part1(pairs: Seq[(Pos,Pos)]): Int = part1 {
     pairs.count(fullContain)
