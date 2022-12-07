@@ -19,8 +19,7 @@ object Day05 extends aocd.Problem(2022, 5, Title = "Supply Stacks"):
         .transpose
         .map(_.dropWhile(_ == ' ').mkString)
       val rearrangement = rearrangementPart.split("\n")
-        .map { s =>
-          val s"move $cnt from $from to $to" = s: @unchecked
+        .map { case s"move $cnt from $from to $to": String =>
           (cnt.toInt, from.toInt-1, to.toInt-1)
         }
       stacks -> rearrangement

@@ -41,6 +41,9 @@ acc = acc ++ path.map(d => d -> (acc(d) + f2))
 val s"$$ cd $d2" = nc2.head: @unchecked
 nc2.tail.head
 path = d2 +: path
+
+path.tails.toList.init.map(_.mkString("/"))
+
 val (c3: Seq[String], nc3: Seq[String]) = nc2.drop(2).span(!_.startsWith("$"))
 var f3 = c3.filterNot(_.startsWith("dir"))
   .map { case s"$size $_" => size.toInt }.sum
@@ -59,3 +62,4 @@ val (c4: Seq[String], nc4: Seq[String]) = nc3.drop(2).drop(2).span(!_.startsWith
 var f4 = c4.filterNot(_.startsWith("dir"))
   .map { case s"$size $_" => size.toInt }.sum
 acc = acc ++ path.map(d => d -> (acc(d) + f4))
+
