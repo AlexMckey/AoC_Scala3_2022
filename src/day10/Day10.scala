@@ -34,7 +34,9 @@ object Day10 extends aocd.Problem(2022, 10, Title = "Cathode-Ray Tube"):
   def part2(cycles: Array[(Int,Int)]): String = part2 {
     cycles.foldLeft(new StringBuilder(240)) {
       case (sb, (c, r)) =>
-        if r - 1 to r + 1 contains c % 40 then sb.append("#") else sb.append(".")
+        if r - 1 to r + 1 contains c % 40
+        then sb.append("#")
+        else sb.append(".")
     }.toString()
       .grouped(40)
       .mkString("\n", "\n", "")
